@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.5.0.495" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Views\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Images\seat.png" />
+    <None Remove="Images\phone.png" />
+    <None Remove="Images\profile-2.jpeg" />
+    <None Remove="Images\profile-1.png" />
+    <None Remove="Images\profile-3.jpg" />
+    <None Remove="Images\profile-4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\seat.png" />
+    <EmbeddedResource Include="Images\phone.png">
+      <LogicalName>MyRidesChallenge.Images.phones.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\profile-2.jpeg" />
+    <EmbeddedResource Include="Images\profile-1.png" />
+    <EmbeddedResource Include="Images\profile-3.jpg" />
+    <EmbeddedResource Include="Images\profile-4.jpg" />
+  </ItemGroup>
+</Project>

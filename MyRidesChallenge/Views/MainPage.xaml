@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="MyRidesChallenge.Views.MainPage"
+             mc:Ignorable="d"
+             xmlns:utils="clr-namespace:MyRidesChallenge.Utils"
+             BackgroundColor="#180B4F"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="HighSizeLabelStyle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+
+        <Style TargetType="Label" x:Key="MediumSizeLabelStyle">
+            <Setter Property="TextColor" Value="#725EF3"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout>
+
+        <Label Text="My Rides"
+               FontSize="40"
+               TextColor="White">
+            <Label.Margin>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <On Platform="iOS" Value="15,90,0,0"/>
+                    <On Platform="Android" Value="15,30,0,0"/>
+                </OnPlatform>
+            </Label.Margin>
+        </Label>
+
+        <ListView x:Name="list"
+                  SelectionMode="None"
+                  HasUnevenRows="True"
+                  IsPullToRefreshEnabled="False"
+                  SeparatorVisibility="None"
+                  BackgroundColor="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <!-- Frame Control -->
+                        <Frame HorizontalOptions="Center"
+                               Margin="10"
+                               BackgroundColor="#3C297E"
+                               HasShadow="False"
+                               CornerRadius="8">
+
+                            <!-- Content Frame -->
+                            <StackLayout Orientation="Vertical"
+                                         HorizontalOptions="CenterAndExpand">
+
+                                <!-- User detail -->
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout Padding="1">
+                                        <Frame IsClippedToBounds="True"
+                                               CornerRadius="18"
+                                               Padding="0"
+                                               HasShadow="False"
+                                               WidthRequest="50"
+                                               HeightRequest="50"
+                                               BackgroundColor="Transparent">
+                                            <Image VerticalOptions="Center"
+                                                   HorizontalOptions="Center"
+                                                   Source="{Binding Photo}"/>
+                                        </Frame>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Vertical"
+                                                 Spacing="0"
+                                                 Margin="6,0,0,0">
+
+                                        <Label Text="{Binding GetFullName}"
+                                               Style="{StaticResource HighSizeLabelStyle}"/>
+                                        <Label Text="{Binding Title}"
+                                               Style="{StaticResource MediumSizeLabelStyle}"/>
+                                    </StackLayout>
+
+                                    <Label Text="{Binding TravelHistory.GetAmountDolarFormat}"
+                                           Style="{StaticResource HighSizeLabelStyle}"
+                                           HorizontalOptions="EndAndExpand"/>
+                                </StackLayout>
+
+                                <!-- Ride detail -->
+                                <StackLayout Orientation="Vertical" Margin="33,0,0,0">
+                                    <StackLayout Orientation="Vertical" Padding="0,10,0,10">
+                                        <!-- Streets -->
+                                        <StackLayout Orientation="Horizontal">
+                                            <BoxView BackgroundColor="{Binding TravelHistory.ColorPickUp}"
+                                                     WidthRequest="10"
+                                                     HeightRequest="10"
+                                                     VerticalOptions="Center"/>
+                                            <Label Text="{Binding TravelHistory.StreetNamePickUp}"
+                                                   VerticalOptions="Center"
+                                                   TextColor="{Binding TravelHistory.ColorPickUp}"
+                                                   Margin="16,0,0,0"/>
+                                        </StackLayout>
+                                        <StackLayout Orientation="Horizontal">
+                                            <BoxView BackgroundColor="{Binding TravelHistory.ColorDestination}"
+                                                     WidthRequest="10"
+                                                     HeightRequest="10"
+                                                     VerticalOptions="Center"/>
+                                            <Label Text="{Binding TravelHistory.StreetNameDestination}"
+                                                   VerticalOptions="Center"
+                                                   TextColor="{Binding TravelHistory.ColorDestination}"
+                                                   Margin="16,0,0,0"/>
+                                        </StackLayout>
+                                    </StackLayout>
+
+                                    <!-- Buttons Section -->
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="{utils:EmbeddedResourceExtention Source=MyRidesChallenge.Images.seat.png}"
+                                               WidthRequest="20"
+                                               HeightRequest="20"
+                                               VerticalOptions="Center"/>
+                                        <Label Text="{Binding TravelHistory.GetSeatsFormat}"
+                                               Style="{StaticResource HighSizeLabelStyle}"
+                                               VerticalOptions="Center"
+                                               Margin="10"/>
+
+                                        <ImageButton BackgroundColor="#725EF3"
+                                                     CornerRadius="6"
+                                                     Padding="10"
+                                                     Source="{utils:EmbeddedResourceExtention Source=MyRidesChallenge.Images.phones.png}">
+
+                                            <ImageButton.WidthRequest>
+                                                <OnPlatform x:TypeArguments="x:Double">
+                                                    <On Platform="iOS" Value="65"/>
+                                                    <On Platform="Android" Value="65"/>
+                                                </OnPlatform>
+                                            </ImageButton.WidthRequest>
+                                        </ImageButton>
+                                        <Button HorizontalOptions="StartAndExpand"
+                                                BackgroundColor="#33CCCC"
+                                                TextColor="White"
+                                                Text="Pick up"
+                                                CornerRadius="6">
+                                            <Button.WidthRequest>
+                                                <OnPlatform x:TypeArguments="x:Double">
+                                                    <On Platform="iOS" Value="115"/>
+                                                    <On Platform="Android" Value="115"/>
+                                                </OnPlatform>
+                                            </Button.WidthRequest>
+                                        </Button>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
